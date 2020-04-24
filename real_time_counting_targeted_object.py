@@ -12,6 +12,7 @@ from utils import backbone
 from api import object_counting_api
 
 input_video = "./input_images_and_videos/The Dancing Traffic Light Manikin by smart.mp4"
+output_video="/output/real_time_counting_targeted_object.api"
 
 # By default I use an "SSD with Mobilenet" model here. See the detection model zoo (https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md) for a list of other models that can be run out-of-the-box with varying speeds and accuracies.
 detection_graph, category_index = backbone.set_model('ssd_mobilenet_v1_coco_2018_01_28', 'mscoco_label_map.pbtxt')
@@ -23,7 +24,6 @@ detection_graph, category_index = backbone.set_model('ssd_mobilenet_v1_coco_2018
 
 targeted_objects = "person, bicycle" # (for counting targeted objects) change it with your targeted objects
 is_color_recognition_enabled = 0
-
-object_counting_api.targeted_object_counting(input_video, detection_graph, category_index, is_color_recognition_enabled, targeted_objects) # targeted objects counting
+object_counting_api.targeted_object_counting(input_video, output_video, detection_graph, category_index, is_color_recognition_enabled, targeted_objects) # targeted objects counting
 
 #object_counting_api.object_counting(input_video, detection_graph, category_index, is_color_recognition_enabled, fps, width, height) # counting all the objects
